@@ -52,7 +52,7 @@ set(LIBRARY_SRCS
   libraries/FS/src/vfs_api.cpp
   libraries/HTTPClient/src/HTTPClient.cpp
   libraries/HTTPUpdate/src/HTTPUpdate.cpp
-  libraries/LITTLEFS/src/LITTLEFS.cpp
+  #libraries/LITTLEFS/src/LITTLEFS.cpp
   libraries/NetBIOS/src/NetBIOS.cpp
   libraries/Preferences/src/Preferences.cpp
   libraries/SD_MMC/src/SD_MMC.cpp
@@ -132,7 +132,7 @@ set(includedirs
   libraries/FS/src
   libraries/HTTPClient/src
   libraries/HTTPUpdate/src
-  libraries/LITTLEFS/src
+  #libraries/LITTLEFS/src
   libraries/NetBIOS/src
   libraries/Preferences/src
   libraries/SD_MMC/src
@@ -147,6 +147,11 @@ set(includedirs
   libraries/WiFi/src
   libraries/WiFiProv/src
   libraries/Wire/src
+  tools/sdk/${IDF_TARGET}/include/soc/${IDF_TARGET}/include
+  tools/sdk/${IDF_TARGET}/include/esp_rom/include
+  tools/sdk/${IDF_TARGET}/include/esp_rom/include/${IDF_TARGET}
+  tools/sdk/${IDF_TARGET}/include/tinyusb/tinyusb/src
+  tools/sdk/${IDF_TARGET}/include/config
   )
 
 set(srcs ${CORE_SRCS} ${LIBRARY_SRCS} ${BLE_SRCS})
@@ -160,5 +165,5 @@ if(IDF_TARGET STREQUAL "esp32")
 target_compile_options(${COMPONENT_TARGET} PUBLIC -DARDUINO=10812 -DARDUINO_ESP32_DEV -DARDUINO_ARCH_ESP32 -DARDUINO_BOARD="ESP32_DEV" -DARDUINO_VARIANT="esp32" -DESP32)
 endif()
 if(IDF_TARGET STREQUAL "esp32s2")
-target_compile_options(${COMPONENT_TARGET} PUBLIC -DARDUINO=10812 -DARDUINO_ESP32S2_DEV -DARDUINO_ARCH_ESP32 -DARDUINO_BOARD="ESP32S2_DEV" -DARDUINO_VARIANT="esp32s2" -DESP32)
+target_compile_options(${COMPONENT_TARGET} PUBLIC -DARDUINO=10812 -DARDUINO_ESP32S2_DEV -DARDUINO_ARCH_ESP32 -DARDUINO_BOARD="ESP32S2_DEV" -DARDUINO_VARIANT="esp32s2" -DESP32 -DARDUINO_SERIAL_PORT=1)
 endif()
