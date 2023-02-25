@@ -417,19 +417,10 @@ bool ETHClass::begin(spi_device_handle_t spi, int8_t phy_addr, int power,
 
   tcpipInit();
 
-  uint8_t mac[6]{0x02,
-                 0x0,
-                 0x0,
-                 (uint8_t)random(255),
-                 (uint8_t)random(255),
-                 (uint8_t)random(255)};
-
   if (use_mac_from_efuse) {
-    uint8_t p[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t p[6] = {0};
     esp_efuse_mac_get_custom(p);
     esp_base_mac_addr_set(p);
-  } else {
-    esp_base_mac_addr_set(mac);
   }
 
   tcpip_adapter_set_default_eth_handlers();
@@ -480,8 +471,9 @@ bool ETHClass::begin(spi_device_handle_t spi, int8_t phy_addr, int power,
     return false;
   }
 
-  // manually set the mac address. eew.
-  // note: this MUST happen before esp_netif_attach and esp_eth_new_netif_glue
+  // set mac address
+  uint8_t mac[6] = {0};
+  esp_read_mac(mac, ESP_MAC_ETH);
   esp_eth_ioctl(eth_handle, ETH_CMD_S_MAC_ADDR, mac);
 
   /* attach Ethernet driver to TCP/IP stack */
