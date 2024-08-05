@@ -82,6 +82,7 @@ public:
     File openNextFile(const char* mode = FILE_READ);
     String getNextFileName(void);
     void rewindDirectory(void);
+    boolean truncate(uint32_t size);
 
 protected:
     FileImplPtr _p;

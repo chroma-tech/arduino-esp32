@@ -46,6 +46,7 @@ public:
     virtual boolean seekDir(long position);
     virtual String getNextFileName(void);
     virtual void rewindDirectory(void) = 0;
+    virtual boolean truncate(uint32_t length) = 0;
     virtual operator bool() = 0;
 };
 

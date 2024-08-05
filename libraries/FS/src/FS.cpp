@@ -211,6 +211,14 @@ void File::rewindDirectory(void)
     _p->rewindDirectory();
 }
 
+boolean File::truncate(uint32_t size)
+{
+    if (!*this) {
+        return false;
+    }
+    _p->truncate(size);
+}
+
 File FS::open(const String& path, const char* mode, const bool create)
 {
     return open(path.c_str(), mode, create);

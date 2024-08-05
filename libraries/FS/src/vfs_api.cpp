@@ -547,3 +547,11 @@ void VFSFileImpl::rewindDirectory(void)
     }
     rewinddir(_d);
 }
+
+boolean VFSFileImpl::truncate(uint32_t length)
+{
+    if(_isDirectory || !_f) {
+        return false;
+    }
+    return ftruncate(fileno(_f), length) == 0;
+}

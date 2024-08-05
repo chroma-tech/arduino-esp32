@@ -75,6 +75,7 @@ public:
     String      getNextFileName(void) override;
     FileImplPtr openNextFile(const char* mode) override;
     void        rewindDirectory(void) override;
+    boolean     truncate(uint32_t length);
     operator    bool();
 };
 
